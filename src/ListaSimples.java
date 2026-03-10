@@ -1,3 +1,8 @@
+package src;
+
+import java.util.Arrays;
+
+
 public class ListaSimples implements ListaOperacoes{
     private String[] lista;
 
@@ -18,26 +23,50 @@ public class ListaSimples implements ListaOperacoes{
      */
     @Override
     public int removerTodas(String elemento) {
-        return 0;
+        int contador = 0;
+        for (int i = 0; i < lista.length; i++) {
+            if (this.lista[i].equals(elemento)) {
+                lista[i] = null;
+                contador++;
+            }
+        }
+        return contador;
     }
 
     @Override
     public int contar() {
-        return 0;
+        int contador = 0;
+        for (String elemento : this.lista) {
+            if (elemento != null) contador++;
+        }
+        return contador;
     }
 
     @Override
     public int adicionarVarios(String[] elementos) {
-        return 0;
+        int contador = 0;
+        for (String elemento : elementos) {
+            for (int j = 0; j < this.lista.length; j++) {
+                if (this.lista[j] == null) {
+                    this.lista[j] = elemento;
+                    contador++;
+                }
+                if (j == this.lista.length - 1) {
+                    return contador;
+                }
+            }
+        }
+        return contador;
     }
 
     @Override
     public String obter(int indice) {
-        return "";
+        return "Lista[" + indice + "] :" + this.lista[indice];
     }
 
     @Override
     public boolean inserir(int indice, String elemento) {
+
         return false;
     }
 
@@ -64,5 +93,12 @@ public class ListaSimples implements ListaOperacoes{
     @Override
     public int substituir(String antigo, String novo) {
         return 0;
+    }
+
+    public boolean estaCheio(){
+        for (String elemento : this.lista) {
+            if (elemento != null) return true;
+        }
+        return false;
     }
 }
