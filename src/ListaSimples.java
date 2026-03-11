@@ -95,7 +95,7 @@ public class ListaSimples implements ListaOperacoes{
     }
     
     /**
-     * Verificação se o indice existe dentro do Array.
+     * Verificação se o indice existe dentro da lista.
      * Um for que garante que quando adicionado, os números se deslocaram para a direita.
      * 
      * @author: Henrique C. Barros
@@ -117,10 +117,21 @@ public class ListaSimples implements ListaOperacoes{
 
         return elementoRemovido;
     }
-
+    /**
+     * Verificação se lista possui elementos para limpar.
+     * 
+     * @author: Henrique C. Barros
+     * @version: 1.0
+     */
     @Override
     public void limpar() {
-
+        if(this.lista.length <= 0){
+            System.out.println("Lista já está limpa.");
+        }
+        else{
+            System.out.println("Lista esvaziada!");
+            Arrays.fill(this.lista, null);
+        }
     }
 
     @Override
