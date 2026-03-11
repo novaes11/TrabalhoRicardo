@@ -93,10 +93,29 @@ public class ListaSimples implements ListaOperacoes{
         }
         return false;
     }
-
+    
+    /**
+     * Verificação se o indice existe dentro do Array.
+     * Um for que garante que quando adicionado, os números se deslocaram para a direita.
+     * 
+     * @author: Henrique C. Barros
+     * @version: 1.0
+     */
     @Override
     public String removerPorIndice(int indice) {
-        return "";
+        if(indice < 0 || indice >= contar()){
+            System.out.println("Indice não encontrado.");
+            return null;
+        }
+        String elementoRemovido = this.lista[indice];
+
+        for(int i = indice; i <  contar() - 1; i++){
+            this.lista[i + 1] = this.lista[i];
+        }
+        //Remove o número duplicado 
+        this.lista[contar() - 1] = null;
+
+        return elementoRemovido;
     }
 
     @Override
