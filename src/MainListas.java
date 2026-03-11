@@ -9,5 +9,6 @@ public class MainListas {
         lista.exibir();
         lista.removerTodas("4");
         lista.exibir();
+
     }
 }

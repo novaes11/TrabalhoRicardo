@@ -14,11 +14,13 @@ public class ListaSimples implements ListaOperacoes{
     public void exibir(){
         String [] aux;
         aux = new String[contar()];
-        for(int i = 0; i < aux.length; i++){
-            for (String s : lista) {
-                if (lista[i] != null) {
-                    aux[i] = s;
+        for (String s : lista) {
+            for (int j = 0; j < aux.length; j++) {
+                if (s != null && aux[j] == null) {
+                    aux[j] = s;
+                    break;
                 }
+
             }
         }
         System.out.println(Arrays.toString(aux));
@@ -44,12 +46,7 @@ public class ListaSimples implements ListaOperacoes{
             }
         }
 
-        String[] aux = new String[contar()];
-        for (int i = 0; i < aux.length; i++) {
-            for (int j = 0; j < lista.length; j++) {
-                if (lista[j] != null) aux[i] = lista[j];
-            }
-        }
+        exibir();
         return contador;
     }
 
