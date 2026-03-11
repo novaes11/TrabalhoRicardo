@@ -10,6 +10,14 @@ public class ListaSimples implements ListaOperacoes{
         if (tamanho <= 0) throw new IllegalArgumentException();
         this.lista = new String[tamanho];
     }
+
+    public void exibir(){
+        System.out.print("[ ");
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null) System.out.print(lista[i]);
+        }
+        System.out.print(" ]");
+    }
     /**
      * Remove TODAS as ocorrências de um determinado elemento da lista.
      *
@@ -28,6 +36,13 @@ public class ListaSimples implements ListaOperacoes{
             if (this.lista[i].equalsIgnoreCase(elemento)) {
                 lista[i] = null;
                 contador++;
+            }
+        }
+
+        String[] aux = new String[contar()];
+        for (int i = 0; i < aux.length; i++) {
+            for (int j = 0; j < lista.length; j++) {
+                if (lista[j] != null) aux[i] = lista[j];
             }
         }
         return contador;
@@ -50,6 +65,7 @@ public class ListaSimples implements ListaOperacoes{
                 if (this.lista[j] == null) {
                     this.lista[j] = elemento;
                     contador++;
+                    break;
                 }
                 if (j == this.lista.length - 1) {
                     return contador;
