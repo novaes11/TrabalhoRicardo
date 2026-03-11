@@ -12,11 +12,16 @@ public class ListaSimples implements ListaOperacoes{
     }
 
     public void exibir(){
-        System.out.print("[ ");
-        for (int i = 0; i < lista.length; i++) {
-            if (lista[i] != null) System.out.print(lista[i]);
+        String [] aux;
+        aux = new String[contar()];
+        for(int i = 0; i < aux.length; i++){
+            for (String s : lista) {
+                if (lista[i] != null) {
+                    aux[i] = s;
+                }
+            }
         }
-        System.out.print(" ]");
+        System.out.println(Arrays.toString(aux));
     }
     /**
      * Remove TODAS as ocorrências de um determinado elemento da lista.
@@ -136,17 +141,43 @@ public class ListaSimples implements ListaOperacoes{
 
     @Override
     public int ultimoIndiceDe(String elemento) {
-        return 0;
+        int aux = 0;
+        if(contarOcorrencias(elemento) == 0){
+            return -1;
+        }
+        for(int i = 0; i < this.lista.length; i++){
+            if(this.lista[i].equalsIgnoreCase(elemento)){
+                aux = i;
+            }
+
+        }
+        return aux;
     }
 
     @Override
     public int contarOcorrencias(String elemento) {
-        return 0;
+        int contador = 0;
+        for (String lista : this.lista) {
+            if (lista.equalsIgnoreCase(elemento)) {
+                contador++;
+            }
+        }
+
+        return contador;
     }
 
     @Override
     public int substituir(String antigo, String novo) {
-        return 0;
+        int contador = 0;
+        if(contarOcorrencias(antigo) == 0) return -1;
+        for(String lista : this.lista){
+            if(lista.equalsIgnoreCase(antigo)) {
+                contador++;
+                lista = novo;
+            }
+        }
+        exibir();
+        return contador;
     }
 
     public boolean estaCheio(){
