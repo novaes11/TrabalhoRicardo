@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Interface que define operações avançadas para manipulação
  * de estruturas de lista baseadas em String.

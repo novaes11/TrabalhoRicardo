@@ -1,3 +1,5 @@
+package src;
+
 public class ListaDinamica implements ListaOperacoes{
     @Override
     public int removerTodas(String elemento) {

@@ -25,7 +25,7 @@ public class ListaSimples implements ListaOperacoes{
     public int removerTodas(String elemento) {
         int contador = 0;
         for (int i = 0; i < lista.length; i++) {
-            if (this.lista[i].equals(elemento)) {
+            if (this.lista[i].equalsIgnoreCase(elemento)) {
                 lista[i] = null;
                 contador++;
             }
@@ -66,7 +66,15 @@ public class ListaSimples implements ListaOperacoes{
 
     @Override
     public boolean inserir(int indice, String elemento) {
-
+        if(contar() < this.lista.length) {
+            for (int i = indice; i < this.lista.length; i++) {
+                if (i < this.lista.length - 1) {
+                    this.lista[i + 1] = this.lista[i];
+                }
+            }
+            this.lista[indice] = elemento;
+            return true;
+        }
         return false;
     }
 
