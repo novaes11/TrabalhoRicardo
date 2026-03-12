@@ -1,6 +1,14 @@
 package src;
 
 public class ListaDinamica implements ListaOperacoes{
+    No inicio;
+
+
+    public ListaDinamica(No inicio) {
+        this.inicio = new No(null);
+        System.out.println("Lista criada com sucesso!");
+    }
+
     @Override
     public int removerTodas(String elemento) {
         return 0;
@@ -12,13 +20,16 @@ public class ListaDinamica implements ListaOperacoes{
     }
 
     @Override
-    public int adicionarVarios(String[] elementos) {
-        return 0;
+    public String obter(int indice) {
+        return "";
     }
 
     @Override
-    public String obter(int indice) {
-        return "";
+    public int adicionarVarios(String[] elementos) {
+        if(!existeInicio()){
+
+        }
+        return 0;
     }
 
     @Override
@@ -49,5 +60,9 @@ public class ListaDinamica implements ListaOperacoes{
     @Override
     public int substituir(String antigo, String novo) {
         return 0;
+    }
+
+    public boolean existeInicio() {
+        return this.inicio.getConteudo() != null;
     }
 }
