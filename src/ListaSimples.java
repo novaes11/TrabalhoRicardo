@@ -178,6 +178,8 @@ public class ListaSimples implements ListaOperacoes{
         }
         exibir();
         return contador;
+
+
     }
 
     public boolean estaCheio(){
