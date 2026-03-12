@@ -13,5 +13,14 @@ public class MainListas {
         lista.exibir();
         lista.limpar();
         lista.exibir();
+
+        ListaDinamica listaDinamica = new ListaDinamica();
+        System.out.println(listaDinamica.adicionarVarios(new String[] {
+                "1", "2", "3", "4"
+        }));
+        listaDinamica.exibir();
+        System.out.println(listaDinamica.contar());
+        System.out.println(listaDinamica.obter(2));
+        listaDinamica.exibir();
     }
 }
