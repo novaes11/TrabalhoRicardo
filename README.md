@@ -1,2 +1,6 @@
 # TrabalhoRicardo
-RESPONSÁVEIS PELO TRABALHO: JOÃO VITOR RIBEIRO DE MORAIS CAMARGO, JOÃO VITOR NOVAES, HENRIQUE CAVALARI BARROS.
+## Participantes do grupo:
+João vitor Novaes
+João Vitor Camargo
+Henrique Cavalari
+<a href="">Acesse o JavaDoc aqui!<a/>
