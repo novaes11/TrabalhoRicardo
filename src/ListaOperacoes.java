@@ -10,6 +10,9 @@ package src;
  */
 public interface ListaOperacoes {
 
+
+
+    public void exibir();
     /**
      * Remove TODAS as ocorrências de um determinado elemento da lista.
      *

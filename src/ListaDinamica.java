@@ -1,9 +1,11 @@
 package src;
 
 /**
- * Implementação de uma Lista Dinâmica Encadeada Simples.
- * * @author Henrique C. Barros
- * @version 1.0
+ * Implementação de uma lista dinâmica encadeada simples.
+ * Esta classe utiliza objetos da classe No para armazenar dados de forma
+ * dinâmica na memória, permitindo crescimento sem tamanho fixo.
+ * @author João Vitor Novaes, João Vitor Camargo e Henrique C. Barros
+ * @version 2.0
  */
 public class ListaDinamica implements ListaOperacoes {
     No inicio;
@@ -13,15 +15,15 @@ public class ListaDinamica implements ListaOperacoes {
      */
     public ListaDinamica() {
         this.inicio = new No(null);
-        System.out.println("[INFO] Lista criada com sucesso!");
+        System.out.println("Lista criada com sucesso!");
     }
 
     /**
-     * Exibe todos os elementos da lista no console.
+     * Percorre a lista e exibe os conteúdos de todos os nós conectados.
      */
     public void exibir() {
         No aux = this.inicio;
-        System.out.print("[LISTA] ");
+        System.out.print("Lista atual: ");
         while (aux != null && aux.getConteudo() != null) {
             System.out.print(aux.getConteudo() + " ");
             aux = aux.getProx();
@@ -30,19 +32,39 @@ public class ListaDinamica implements ListaOperacoes {
     }
 
     /**
-     * Remove todas as ocorrências de um elemento específico.
-     * @param elemento O texto a ser removido.
-     * @return A quantidade de elementos removidos.
+     * Remove todos os nós que contenham o elemento especificado,
+     * reajustando os ponteiros da lista.
+     * * @param elemento O texto a ser buscado e removido.
+     * @return O total de ocorrências removidas.
      */
     @Override
     public int removerTodas(String elemento) {
-        // Implementação futura
-        return 0;
+        int contador = 0;
+        if (!existeInicio()) return 0;
+
+        while (this.inicio != null && this.inicio.getConteudo() != null && this.inicio.getConteudo().equalsIgnoreCase(elemento)) {
+            this.inicio = this.inicio.getProx();
+            contador++;
+        }
+
+        No atual = this.inicio;
+        while (atual != null && atual.getProx() != null) {
+            if (atual.getProx().getConteudo() != null && atual.getProx().getConteudo().equalsIgnoreCase(elemento)) {
+                atual.setProx(atual.getProx().getProx());
+                contador++;
+            } else {
+                atual = atual.getProx();
+            }
+        }
+
+        System.out.println("Foram removidas " + contador + " ocorrências de '" + elemento + "'.");
+        exibir();
+        return contador;
     }
 
     /**
-     * Conta o total de elementos presentes na lista.
-     * @return O número total de nós com conteúdo.
+     * Conta a quantidade de nós válidos (não nulos) na lista.
+     * @return Total de elementos encontrados.
      */
     @Override
     public int contar() {
@@ -58,14 +80,14 @@ public class ListaDinamica implements ListaOperacoes {
     }
 
     /**
-     * Recupera o conteúdo de um nó em uma posição específica.
-     * @param indice A posição desejada.
-     * @return O conteúdo ou null se o índice for inválido.
+     * Busca o conteúdo de um nó baseado em seu índice lógico.
+     * @param indice Posição desejada (começando em 0).
+     * @return O valor da String no nó ou null se o índice for inválido.
      */
     @Override
     public String obter(int indice) {
         if (indice < 0 || indice >= contar()) {
-            System.out.println("[ERRO] Índice " + indice + " fora dos limites.");
+            System.out.println("Erro: Índice " + indice + " fora dos limites.");
             return null;
         }
         No aux = this.inicio;
@@ -76,8 +98,8 @@ public class ListaDinamica implements ListaOperacoes {
     }
 
     /**
-     * Adiciona múltiplos elementos ao final da lista.
-     * @param elementos Array de Strings a serem adicionadas.
+     * Adiciona uma sequência de elementos ao final da lista encadeada.
+     * @param elementos Array de Strings a serem inseridas.
      * @return Quantidade de elementos adicionados com sucesso.
      */
     @Override
@@ -86,25 +108,25 @@ public class ListaDinamica implements ListaOperacoes {
 
         int contador = 0;
         for (String s : elementos) {
-            // Reaproveitando a lógica de inserir no final para simplificar
             if (inserir(contar(), s)) contador++;
         }
-        System.out.println("[INFO] " + contador + " elementos adicionados.");
+        System.out.println(contador + " elementos adicionados.");
+        exibir();
         return contador;
     }
 
     /**
-     * Insere um novo elemento em qualquer posição da lista.
+     * Insere um novo nó em uma posição específica, ajustando as referências dos nós vizinhos.
      * @param indice Posição de inserção.
-     * @param elemento Conteúdo a ser inserido.
-     * @return true se inserido com sucesso.
+     * @param elemento Conteúdo do novo nó.
+     * @return true se a operação foi concluída, false para índices inválidos.
      */
     @Override
     public boolean inserir(int indice, String elemento) {
         int totalElementos = contar();
 
         if (indice < 0 || indice > totalElementos) {
-            System.out.println("[ERRO] Falha ao inserir: índice " + indice + " inválido.");
+            System.out.println("Falha ao inserir: índice " + indice + " inválido.");
             return false;
         }
 
@@ -117,7 +139,8 @@ public class ListaDinamica implements ListaOperacoes {
                 novo.setProx(this.inicio);
                 this.inicio = novo;
             }
-            System.out.println("[OK] Elemento '" + elemento + "' inserido no início.");
+            System.out.println("Elemento '" + elemento + "' inserido no início.");
+            exibir();
             return true;
         }
 
@@ -129,21 +152,22 @@ public class ListaDinamica implements ListaOperacoes {
         novo.setProx(aux.getProx());
         aux.setProx(novo);
 
-        System.out.println("[OK] Elemento '" + elemento + "' inserido no índice " + indice + ".");
+        System.out.println("Elemento '" + elemento + "' inserido no índice " + indice + ".");
+        exibir();
         return true;
     }
 
     /**
-     * Remove um elemento de uma posição específica.
-     * @param indice Posição do alvo.
-     * @return O conteúdo que foi removido.
+     * Desconecta um nó da lista em um índice específico e retorna seu valor.
+     * @param indice Posição do nó a ser removido.
+     * @return O conteúdo do nó removido ou null caso não exista.
      */
     @Override
     public String removerPorIndice(int indice) {
         int total = contar();
 
         if (indice < 0 || indice >= total) {
-            System.out.println("[ERRO] Impossível remover: índice " + indice + " inexistente.");
+            System.out.println("Impossível remover: índice " + indice + " inexistente.");
             return null;
         }
 
@@ -152,7 +176,8 @@ public class ListaDinamica implements ListaOperacoes {
         if (indice == 0) {
             elementoRemovido = this.inicio.getConteudo();
             this.inicio = this.inicio.getProx();
-            System.out.println("[REMOVE] '" + elementoRemovido + "' removido da posição 0.");
+            System.out.println("'" + elementoRemovido + "' removido da posição 0.");
+            exibir();
             return elementoRemovido;
         }
 
@@ -165,23 +190,25 @@ public class ListaDinamica implements ListaOperacoes {
         elementoRemovido = alvo.getConteudo();
         anterior.setProx(alvo.getProx());
 
-        System.out.println("[REMOVE] '" + elementoRemovido + "' removido da posição " + indice + ".");
+        System.out.println("'" + elementoRemovido + "' removido da posição " + indice + ".");
+        exibir();
         return elementoRemovido;
     }
 
     /**
-     * Limpa a lista completamente.
+     * Reinicializa a lista, desconectando todos os nós existentes.
      */
     @Override
     public void limpar() {
         this.inicio = new No(null);
-        System.out.println("[INFO] Lista esvaziada.");
+        System.out.println("Lista esvaziada.");
+        exibir();
     }
 
     /**
-     * Busca a última ocorrência de um elemento na lista.
-     * @param elemento Conteúdo a ser buscado.
-     * @return O último índice encontrado ou -1.
+     * Localiza o índice da última ocorrência de um elemento percorrendo os nós.
+     * @param elemento O texto a ser buscado.
+     * @return O índice da última ocorrência ou -1 se não encontrado.
      */
     @Override
     public int ultimoIndiceDe(String elemento) {
@@ -196,14 +223,13 @@ public class ListaDinamica implements ListaOperacoes {
             aux = aux.getProx();
             indiceAtual++;
         }
-        System.out.println("[BUSCA] Última ocorrência de '" + elemento + "' está no índice: " + ultimoIndice);
         return ultimoIndice;
     }
 
     /**
-     * Conta quantas vezes um elemento aparece na lista.
-     * @param elemento O conteúdo alvo.
-     * @return Total de ocorrências.
+     * Percorre a lista contando quantas vezes um elemento aparece.
+     * @param elemento Termo de busca.
+     * @return Total de ocorrências encontradas.
      */
     @Override
     public int contarOcorrencias(String elemento) {
@@ -215,15 +241,14 @@ public class ListaDinamica implements ListaOperacoes {
             }
             aux = aux.getProx();
         }
-        System.out.println("[COUNT] O elemento '" + elemento + "' aparece " + contador + " vezes.");
         return contador;
     }
 
     /**
-     * Substitui o conteúdo de todas as ocorrências de um termo por outro.
-     * @param antigo Termo a ser substituído.
-     * @param novo Novo conteúdo.
-     * @return Quantidade de substituições realizadas.
+     * Substitui o valor de todos os nós que contenham o termo antigo pelo novo termo.
+     * @param antigo Valor a ser substituído.
+     * @param novo Novo valor a ser gravado no nó.
+     * @return Quantidade de alterações realizadas.
      */
     @Override
     public int substituir(String antigo, String novo) {
@@ -236,13 +261,14 @@ public class ListaDinamica implements ListaOperacoes {
             }
             aux = aux.getProx();
         }
-        System.out.println("[SUBST] Substituídas " + mudancas + " ocorrências de '" + antigo + "' por '" + novo + "'.");
+        System.out.println("Substituídas " + mudancas + " ocorrências de '" + antigo + "' por '" + novo + "'.");
+        exibir();
         return mudancas;
     }
 
     /**
-     * Verifica se o primeiro nó da lista possui conteúdo.
-     * @return true se o início existe e não é nulo.
+     * Valida se a lista possui ao menos um nó de dados inicializado.
+     * @return true se o início não for nulo e contiver dados.
      */
     public boolean existeInicio() {
         return this.inicio != null && this.inicio.getConteudo() != null;

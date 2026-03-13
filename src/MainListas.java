@@ -1,9 +1,21 @@
 package src;
 
+/**
+ * Classe principal para execução de testes e comparação de desempenho entre
+ * as implementações de listas estáticas e dinâmicas.
+ * * Esta classe utiliza o polimorfismo para aplicar o mesmo conjunto de testes
+ * em diferentes estruturas de dados que assinam o contrato ListaOperacoes.
+ * @author João Vitor Novaes, João Vitor Camargo e Henrique C. Barros
+ * @version 2.0
+ */
 public class MainListas {
+
+    /**
+     * Ponto de entrada do programa.
+     * Instancia as listas Simples (vetor) e Dinâmica (nós) para demonstração.
+     * * @param args Argumentos de linha de comando (não utilizados).
+     */
     public static void main(String[] args) {
-        // 1. Instanciação das duas listas
-        // A simples com limite de 10, a dinâmica começa vazia.
         ListaOperacoes listaSimples = new ListaSimples(10);
         ListaOperacoes listaDinamica = new ListaDinamica();
 
@@ -11,12 +23,9 @@ public class MainListas {
         System.out.println("   COMPARAÇÃO DAS LISTAS");
         System.out.println("====================================================");
 
-        // Executando testes na Lista Simples (Vetor)
         System.out.println("\n==LISTA SIMPLES==");
         testar(listaSimples);
 
-
-        // Executando testes na Lista Dinâmica (Nós)
         System.out.println("\n== LISTA DINÂMICA ==");
         testar(listaDinamica);
 
@@ -26,20 +35,20 @@ public class MainListas {
     }
 
     /**
-     * Este metodo recebe as duas classe que implementam ListaOperacoes.
-     * Isso permite testar ambas as listas com o exato mesmo fluxo.
+     * Executa uma bateria de testes padronizada em uma implementação de lista.
+     * * O fluxo inclui adição em massa, inserção indexada, contagem de ocorrências,
+     * substituição de valores, busca de índices e limpeza de dados.
+     * * @param lista Objeto que implementa a interface ListaOperacoes a ser testado.
      */
     public static void testar(ListaOperacoes lista) {
         // 1. Adicionar Vários
         String[] nomes = {"Ana", "Carlos", "Alberto", "Ana", "Pedro"};
         System.out.println("--- Adicionando elementos iniciais ---");
         lista.adicionarVarios(nomes);
-        imprimirEstado(lista);
 
         // 2. Inserir em posição específica
         System.out.println("\n--- Inserindo 'Zeca' no índice 2 ---");
         lista.inserir(2, "Zeca");
-        imprimirEstado(lista);
 
         // 3. Contar Ocorrências
         System.out.println("\n--- Verificando duplicatas ---");
@@ -49,7 +58,6 @@ public class MainListas {
         // 4. Substituir
         System.out.println("\n--- Substituindo 'Ana' por 'Maria' ---");
         lista.substituir("Ana", "Maria");
-        imprimirEstado(lista);
 
         // 5. Último Índice
         System.out.println("\n--- Localizando última 'Maria' ---");
@@ -59,7 +67,6 @@ public class MainListas {
         // 6. Remover por Índice
         System.out.println("\n--- Removendo elemento do índice 3 ---");
         lista.removerPorIndice(3);
-        imprimirEstado(lista);
 
         // 7. Obter
         System.out.println("\n--- Consultando índice 0 ---");
@@ -69,18 +76,5 @@ public class MainListas {
         System.out.println("\n--- Resetando lista ---");
         lista.limpar();
         System.out.println("Total após limpar: " + lista.contar());
-    }
-
-    /**
-     * Método auxiliar para exibir o conteúdo atual e o total de itens.
-     */
-    public static void imprimirEstado(ListaOperacoes lista) {
-        // Tenta fazer o cast para chamar o método exibir() que não está na interface
-        if (lista instanceof ListaSimples) {
-            ((ListaSimples) lista).exibir();
-        } else if (lista instanceof ListaDinamica) {
-            ((ListaDinamica) lista).exibir();
-        }
-        System.out.println("Total de elementos: " + lista.contar());
     }
 }
