@@ -1,1 +1,2 @@
-# TrabalhoRicardo
+# TrabalhoRicardo#Pilha
+#Lista
