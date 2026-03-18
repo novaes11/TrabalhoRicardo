@@ -1,57 +1,53 @@
 package Pilha;
 
-import java.util.Stack;
+public class PilhaDinamica {
 
-public class PilhaDinamica implements PilhaOperacoes {
-    No inicio;
+    private No inicio;
 
-    public void PilhaDinamica(){
-        this.inicio = this.inicio;
+    public PilhaDinamica(){
+        this.inicio = null;
     }
 
-    public boolean estaVazia() {
-        return !inicio.empty();
+    //Verifica se a pilha está vazia
+    public boolean estaVazia(){
+        return this.inicio == null;
     }
 
-    public void desempilhar(String[] elementos) {
+    //Empilha os números, porém seguindo a regra de first in last out.
+    public void empilhar(String conteudo){
+        No novo = new No(conteudo);
+        novo.proximo = inicio;
+        inicio = novo;
+    }
 
-        if (estaVazia()) {
-            System.out.println("A pilha está vazia!");
+    //Desempilha seguindo o raciocinio de first in last out
+    public String desempilhar(){
+        if(estaVazia()){
             return null;
         }
-        else if(!atual.conteudo().equals(null) || atual.conteudo().isBlank()) {
-            for(String e : elementos){
-                No novo = new No(atual);
-                novo = inicio;
-                atual = novo;
-                System.out.println("Elemento removido da pilha: " + elementos.pop());
-        }
 
-        }
-
-
-
+        String itemRemovido = inicio.conteudo;
+        inicio = inicio.proximo;
+        return itemRemovido;
     }
 
-    public void empilhar() {
-
-    }
-
-    public int temInicio(String[] elementos) {
-        return elementos[inicio];
+    public String consultarInicio(){
+        if(estaVazia()){
+            System.out.println("Pilha vazia!");
+            return null;
+        }
+        return inicio.conteudo;
     }
 
     public void exibir(){
-        for(int i = 0; i <= inicio; i++){
-            System.out.println(" " + itens[i]);
+        if(estaVazia()){
+            System.out.println("Pilha vazia!");
+            return;
         }
-}
-    public void UltimoIndice(){
-        No atual = inicio.prox;
-        No proximo = atual.prox;
-
-        if(!atual.conteudo().equals(null) && proximo.conteudo.equals(null)){
-
+        No atual = inicio;
+        while(atual != null){
+            System.out.println(atual.conteudo);
+            atual = atual.proximo;
         }
     }
 }

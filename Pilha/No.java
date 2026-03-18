@@ -1,27 +1,12 @@
 package Pilha;
 
-public class No {
-    No prox;
+
+public class No{
     String conteudo;
+    No proximo;
 
-    public No(String conteudo) {
-        this.prox = null;
+    public No(String conteudo){
         this.conteudo = conteudo;
-    }
-
-    public No getProx() {
-        return prox;
-    }
-
-    public void setProx(No prox) {
-        this.prox = prox;
-    }
-
-    public String getConteudo() {
-        return conteudo;
-    }
-
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
+        this.proximo = null;
     }
 }
