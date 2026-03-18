@@ -1,5 +1,7 @@
 package Pilha;
 
+import java.util.Stack;
+
 public class PilhaDinamica implements PilhaOperacoes {
     No inicio;
 
@@ -8,32 +10,24 @@ public class PilhaDinamica implements PilhaOperacoes {
     }
 
     public boolean estaVazia() {
-        return inicio == null;
+        return !inicio.empty();
     }
 
-    public class PilhaDinamica implements PilhaOperacoes {
-        No inicio;
+    public void desempilhar(String[] elementos) {
 
-        public PilhaDinamica() {
-            this.inicio = null;
+        if (estaVazia()) {
+            System.out.println("A pilha está vazia!");
+            return null;
+        }
+        else if(!atual.conteudo().equals(null) || atual.conteudo().isBlank()) {
+            for(String e : elementos){
+                No novo = new No(atual);
+                novo = inicio;
+                atual = novo;
+                System.out.println("Elemento removido da pilha: " + elementos.pop());
         }
 
-        public boolean estaVazia() {
-            return inicio == null;
         }
-
-        public Object desempilhar() {
-            if (estaVazia()) {
-                System.out.println("A pilha está vazia!");
-                return null;
-            }
-
-            Object conteudoRemovido = inicio.getConteudo();
-            inicio = inicio.prox;
-
-            return conteudoRemovido;
-        }
-    }
 
 
 
@@ -43,16 +37,15 @@ public class PilhaDinamica implements PilhaOperacoes {
 
     }
 
-    public boolean temInicio() {
-        No atual = inicio.prox;
-
-        if (!atual.conteudo().equals(null)) {
-            return true;
-        } else {
-            return false;
-        }
+    public int temInicio(String[] elementos) {
+        return elementos[inicio];
     }
 
+    public void exibir(){
+        for(int i = 0; i <= inicio; i++){
+            System.out.println(" " + itens[i]);
+        }
+}
     public void UltimoIndice(){
         No atual = inicio.prox;
         No proximo = atual.prox;
